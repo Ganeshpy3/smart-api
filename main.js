@@ -1,4 +1,4 @@
-const {gmail} = require("./gmail");
+const {gmail} = require("./Google/gmail");
 
 /**
  * Google
