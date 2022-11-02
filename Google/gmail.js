@@ -233,14 +233,42 @@ class Gmail {
 
     /**
      * Removes the specified message from the trash.
-     * @param {*} id 
+     * @param {string} id 
      */
     async unTrashMessage(id){
         return this.invokeUrl(`messages/${id}/untrash`,"POST");
     }
+
+    /**
+     * 
+     * @param {string} to 
+     * @param {string} subject 
+     * @param {string} message 
+     * @returns 
+     */
+    async sendMessage(to,subject,message){
+        var messsage = `To:${to}\nSubject:${subject}\n\n${message}\n`;
+        var body = {
+                "message":{
+                    "raw":base64.encode(messsage)
+                }
+        }
+        return this.invokeUrl(`/messages/send`,"POST",body);
+    }
     
 
     // ************************* Mail ************************* //
+
+    // ************************* Labels ************************* //
+
+    async getLableList(){
+        return this.invokeUrl('/labels',"GET");
+    }
+
+    async getLabelById(id){
+        return this.invokeUrl(`/labels/${id}`,"GET");
+    }
+
     
 }
 
